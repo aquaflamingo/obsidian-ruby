@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/obsidianmd/version"
+require_relative "lib/obsidian/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "obsidianmd"
-  spec.version       = ObsidianMd::VERSION
+  spec.name          = "obsidian-ruby"
+  spec.version       = Obsidian::VERSION
   spec.authors       = ["aquaflamingo"]
   spec.email         = ["16901597+aquaflamingo@users.noreply.github.com"]
 

@@ -1,4 +1,4 @@
-# ObsidianMd
+# Obsidian
 
 Work in progress
 
@@ -7,7 +7,7 @@ Work in progress
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'obsidian.md'
+gem 'obsidian-ruby'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install obsidian.md
+    $ gem install obsidian-ruby
 
 ## Usage
 
@@ -30,7 +30,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/obsidianmd.
+Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/obsidian-ruby.
 
 ## License
 

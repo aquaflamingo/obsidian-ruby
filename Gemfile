@@ -2,9 +2,8 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in obsidianmd.gemspec
+# Specify your gem's dependencies in obsidian.gemspec
 gemspec
 
 gem "rake", "~> 13.0"
-
 gem "rubocop", "~> 0.80"
