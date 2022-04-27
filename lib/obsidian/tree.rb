@@ -1,5 +1,10 @@
+require 'forwardable'
+
 class Tree
+  extend Forwardable
+
   attr_accessor :content, :parent, :name
+  def_delegator :@children, :[], :pick
 
   def initialize
     @children = []
@@ -19,6 +24,7 @@ class Tree
     @children << child
     child
   end
+  alias << :add_child
 
   def root!
     @parent = nil
@@ -27,12 +33,14 @@ class Tree
   def root?
     !@parent.present?
   end
+  alias is_root? :root?
 
   def leaf?
     !has_children?
   end
+  alias is_leaf? :leaf?
 
   def has_children?
-    @children.size < 1
+    @children.size > 1
   end
 end
