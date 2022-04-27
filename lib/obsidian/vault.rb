@@ -1,3 +1,6 @@
+# 
+# Vault is a representation of an Obsidian.md Vault Object
+#
 class Vault
   def initialize(config)
     @config = config
@@ -10,12 +13,14 @@ class Vault
   end
 
   def new_folder
+    raise NotImplementedError
   end
 
   def new_file
+    raise NotImplementedError
   end
 
-    private 
+  private 
 
   class Config
     attr_reader :path, :name

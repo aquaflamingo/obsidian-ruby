@@ -1,8 +1,20 @@
 require_relative 'tree'
 
+#
+# FileTree is an in-memory representation of a File system tree
+#
 class FileTree
+  #
+  # Builder is a convenience module for building a FileTree
+  #
   module Builder
     class << self
+      # 
+      # Builds a Tree object from the provided path
+      #
+      # @param path [File, String]
+      #
+      # @return Tree
       def from_path(path)
         ft = Tree.new
         ft.content = path
@@ -14,6 +26,14 @@ class FileTree
         build_tree(ft, files)
       end
 
+      # 
+      # Recursive Tree building method
+      #
+      # @param file_tree [Tree]
+      # @param files [Array<String>]
+      #
+      # @return Tree
+      #
       def build_tree(file_tree, files)
         # If there are no proximate files
         return file_tree if files.empty?
@@ -37,7 +57,6 @@ class FileTree
         return file_tree
       end
     end
-
 
     private_class_method :build_tree
   end
