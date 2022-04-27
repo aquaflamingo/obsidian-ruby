@@ -1,86 +1,41 @@
+require_relative 'tree'
+
 class FileTree
-  attr_accessor :content, parent, :name
+  module Builder
+    class << self
+      def from_path(path)
+        ft = Tree.new
+        ft.content = path
+        ft.name = File.basename(path)
+        ft.root!
 
-  class Builder
-    # TODO make builder
-    def add(ft)
-      # Look at all files proximal to this file
-      files = Dir.glob(File.join(path, "*"))
+        build_tree(ft)
+      end
 
-      # If there are no proximate files
-      if files.empty?
-        return
+      def build_tree(file_tree)
+        # Look at all files proximal to this file
+        files = Dir.glob(File.join(file_tree.content, "*"))
 
-      files.each do |f|
-        child_ft = FileTree.new
-        child_ft.name = File.basename(f)
-        child_ft.content = f
+        # If there are no proximate files
+        return if files.empty?
 
-        ft.add_child(child_ft)
+        # For each file adjacent to this file:
+        #   Create a new child file tree
+        #   Set its attributes up
+        #   Make this file tree a child to the previous
+        #   Recursively build the child file tree
+        files.each do |f|
+          binding.pry
+          child_ft = Tree.new(f.path)
+          child_ft.name = File.basename(f)
+          file_tree.add_child(child_ft)
 
-        add(ft)
+          build_tree(child_ft)
+        end
       end
     end
 
-    def from_path(path)
-      ft = new 
 
-      ft.root!
-
-      add(ft)
-
-      # Start
-      # Set base path as root node
-      # Glob all dir/files in path
-      #
-      # if glob is empty 
-      #   return
-      # 
-      # For each dir/file in glob
-      #
-      # Recursion
-      #     Add dir/file to node children
-      #
-      #   Base case: Check if file is a !directory
-      #     return
-      #
-      #   Else
-    end
-  end
-
-
-  def initialize
-    @children = []
-    @children_hash = {}
-  end
-
-  def add_child(child)
-    raise ArgumentError.new "child cannot be nil" unless child
-
-    if @children_hash.keys.include?(child.name)
-      raise ArgumentError.new("Child already present")
-    end
-
-    child.parent = child
-
-    @children_hash[child.name] = child
-    @children << child
-    child
-  end
-
-  def root!
-    @parent = nil
-  end
-
-  def root?
-    !@parent.present?
-  end
-
-  def leaf?
-    !has_children?
-  end
-
-  def has_children?
-    @children.size < 1
+    private_class_method :build_tree
   end
 end
