@@ -1,9 +1,20 @@
 require_relative 'tree'
+require 'delegate'
 
 #
 # FileTree is an in-memory representation of a File system tree
 #
-class FileTree
+class FileTree < SimpleDelegator
+  def initialize
+    @t = Tree.new
+
+    super(@t)
+  end
+
+  def find_file(path)
+    raise NotImplementedError
+  end
+
   #
   # Builder is a convenience module for building a FileTree
   #
@@ -16,13 +27,12 @@ class FileTree
       #
       # @return Tree
       def from_path(path)
-        ft = Tree.new
-        ft.content = path
+        ft = FileTree.new
+        ft.content = File.new(path)
         ft.name = File.basename(path)
         ft.root!
 
         files = Dir.glob(File.join(ft.content, "*"))
-
         build_tree(ft, files)
       end
 
