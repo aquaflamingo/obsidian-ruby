@@ -17,5 +17,16 @@ class FileTreeTest < Minitest::Test
       assert ft.has_children?, true
       assert ft.root?, true
     end
+
+    def test_find
+      ft = FileTree::Builder.from_path(@tmp_test_path)
+
+      file_to_find = File.join @tmp_test_path, "file1"
+
+      file, found = ft.find_file(file_to_find)
+
+      assert_equal found, true
+      assert_equal file.name, "file1"
+    end
   end
 end
