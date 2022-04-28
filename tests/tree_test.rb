@@ -17,9 +17,7 @@ class TreeTest < Minitest::Test
   end
 
   def test_add_child
-    @tree.add_child(
-      Tree.new
-    )
+    @tree.add_child(Tree.new)
 
     assert @tree.has_children?, true
   end
@@ -31,7 +29,7 @@ class TreeTest < Minitest::Test
     @tree << t1
     @tree << t2
 
-    # TODO
+    assert_equal @tree.pick(0), t1
   end
 end
 

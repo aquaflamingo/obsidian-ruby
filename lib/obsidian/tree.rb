@@ -71,6 +71,6 @@ class Tree
   # @return Boolean
   #
   def has_children?
-    @children.size > 1
+    @children.size > 0
   end
 end
