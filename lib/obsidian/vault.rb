@@ -16,12 +16,12 @@ class Vault
     new(Config.new(path), name)
   end
 
-  def new_dir
-    raise NotImplementedError
+  def new_dir(new_dir_path)
+    @fm.new_dir(new_dir_path)
   end
 
-  def new_file
-    raise NotImplementedError
+  def new_file(new_file_path)
+    @fm.new_file(new_file_path)
   end
 
   # 
@@ -51,16 +51,17 @@ class Vault
       @ft = FileTree::Builder.from_path(root)
     end
 
-    def ls
-      raise NotImplementedError
+    def new_file(file_path)
+      dir, base = File.split(file_path)
+
+      # TODO:
+
     end
 
-    def new_file(file_name, at)
-      raise NotImplementedError
-    end
+    def new_dir(dir_path)
+      dir, base = File.split(file_path)
 
-    def new_dir(dir_name, at)
-      raise NotImplementedError
+      # TODO:
     end
   end
 end

@@ -11,8 +11,13 @@ class FileTree < SimpleDelegator
     super(@t)
   end
 
-  def find_file(path)
-    raise NotImplementedError
+  def find_child(path)
+    dir, base = File.split(path)
+
+  end
+
+  def reload!
+    Builder.traverse_files_and_build_tree(self)
   end
 
   #
@@ -32,8 +37,12 @@ class FileTree < SimpleDelegator
         ft.name = File.basename(path)
         ft.root!
 
-        files = Dir.glob(File.join(ft.content, "*"))
-        build_tree(ft, files)
+        traverse_files_and_build_tree(ft)
+      end
+
+      def traverse_files_and_build_tree(file_tree)
+        files = Dir.glob(File.join(file_tree.content, "*"))
+        build_tree(file_tree, files)
       end
 
       # 
