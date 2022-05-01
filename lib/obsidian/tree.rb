@@ -13,7 +13,7 @@ class Tree
     @children = []
     @children_hash = {}
   end
-  
+ 
   # 
   # Adds a new child tree to this Tree
   #
